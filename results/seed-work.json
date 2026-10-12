@@ -1,0 +1,17 @@
+{
+  "prefix": "rasul_zeynalov",
+  "dataset": "work",
+  "counts": {
+    "users": 3000,
+    "categories": 10,
+    "tickets": 50000,
+    "comments": 150000
+  },
+  "md5": {
+    "users": "812f0b205d78a1cb959894dd9d17f93a",
+    "categories": "40d3e19398aa67caad1ce1d48daab91b",
+    "tickets": "d29f3a843c2b5cb9152502dfc3fb92eb",
+    "comments": "7438eb5fbb1f3afde9a93db553f8e48d"
+  },
+  "postgres": "PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit"
+}

@@ -1,0 +1,9 @@
+assignment
+_report
+results
+.git
+__pycache__
+.env
+*.docx
+*.zip
+.pytest_cache

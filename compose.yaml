@@ -1,0 +1,30 @@
+name: rasul_zeynalov
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: rasul_zeynalov
+      POSTGRES_USER: rasul_zeynalov
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rasul_zeynalov -d rasul_zeynalov"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://rasul_zeynalov:${DB_PASSWORD:-changeme}@db:5432/rasul_zeynalov
+      TOKEN_SECRET: ${TOKEN_SECRET:-changeme}
+      SEED_PASSWORD: ${SEED_PASSWORD:-changeme}
+    ports:
+      - "127.0.0.1:20802:8000"
+    volumes:
+      - ./results:/service/results
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  db_data:

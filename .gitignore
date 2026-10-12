@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+.env
+_report/
+assignment/
+*.docx
+*.zip
+results/*.txt
+results/screenshots/
+results/verification.json
+results/*-first.json

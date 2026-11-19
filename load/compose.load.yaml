@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: load/Dockerfile
+    cap_add:
+      - SYS_PTRACE
+    ports: !override
+      - "127.0.0.1:20812:8000"
+    volumes: !reset []
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "${DZ2_WORKERS:-1}"]
+  k6:
+    image: grafana/k6:0.55.0
+    profiles: ["load"]
+    network_mode: "service:api"
+    user: "${DZ2_K6_USER:-1000:1000}"
+    environment:
+      BASE_URL: http://127.0.0.1:8000
+      SEED_PASSWORD: "${SEED_PASSWORD:-changeme}"
+      SHOW_SUMMARY: "1"
+    volumes:
+      - ./load:/load:ro
+      - "${DZ2_RESULTS:-../dz2-direct}:/out"
